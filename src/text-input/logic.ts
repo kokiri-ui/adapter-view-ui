@@ -1,5 +1,5 @@
 import { FormControlSize } from 'petals-ui/dist/form-control';
-import { IInputComponent, InputHeadlessComponent } from 'petals-ui/dist/input';
+import { ITextInputComponent, TextInputHeadlessComponent } from 'petals-ui/dist/text-input';
 import { CreateElement, VNode } from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import { Input as IvuInput } from 'view-design';
@@ -9,11 +9,11 @@ import { getComponentName, BaseStructuralComponent } from '../basic';
 @Component({
   // @ts-ignore
   abstract: true,
-  name: getComponentName('input'),
+  name: getComponentName('textInput'),
 })
-export default class Input
-  extends BaseStructuralComponent<InputHeadlessComponent>
-  implements IInputComponent {
+export default class TextInput
+  extends BaseStructuralComponent<TextInputHeadlessComponent>
+  implements ITextInputComponent {
   @Prop({ type: String, default: '' })
   public readonly name!: string;
 
@@ -41,12 +41,6 @@ export default class Input
   @Prop({ type: Number })
   public readonly maxLength!: number;
 
-  @Prop({ type: String, default: 'text' })
-  public readonly type!: string;
-
-  @Prop({ type: Boolean, default: false })
-  public readonly showWordLimit!: boolean;
-
   public render(h: CreateElement): VNode {
     const props: Record<string, any> = {
       name: this.name,
@@ -55,8 +49,6 @@ export default class Input
       readonly: this.readonly,
       placeholder: this.placeholder,
       clearable: this.clearable,
-      type: this.type,
-      showWordLimit: this.showWordLimit,
     };
 
     if (this.size === 'large' || this.size === 'small') {
@@ -75,6 +67,6 @@ export default class Input
   }
 
   public created(): void {
-    this.setHeadlessComponent(new InputHeadlessComponent(this));
+    this.setHeadlessComponent(new TextInputHeadlessComponent(this));
   }
 }
