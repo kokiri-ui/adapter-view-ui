@@ -38,7 +38,7 @@ export default class Button
   private handleClick(): void {} // eslint-disable-line @typescript-eslint/no-empty-function
 
   public render(h: CreateElement): VNode {
-    const props: Record<string, any> = { disabled: this.disabled };
+    const props: Record<string, any> = { disabled: this.disabled, ghost: this.outlined };
 
     if (includes(this.color, ['primary', 'success', 'warning', 'danger', 'info'])) {
       props.type = this.color === 'danger' ? 'error' : this.color;
@@ -46,7 +46,7 @@ export default class Button
 
     if (this.border === 'dashed') {
       props.type = 'dashed';
-    } else if (this.border === 'none' && this.outlined) {
+    } else if (this.border === 'none') {
       props.type = 'text';
     }
 
